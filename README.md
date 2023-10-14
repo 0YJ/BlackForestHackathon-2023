@@ -11,3 +11,6 @@ python -m venv .env oder  py -m venv .env
 pip install -r requirements.txt  
 
 python demo\img\img_sender.py
+
+ssh bfh@192.168.178.24
+bfh2023
