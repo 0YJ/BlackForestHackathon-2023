@@ -1,5 +1,6 @@
-streamlit
+#streamlit
 opencv-python
-imagezmq
-imutils
+pyzmq
+#imagezmq
+#imutils
 tensorflow
