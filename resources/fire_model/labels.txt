@@ -1,0 +1,2 @@
+0 fire
+1 no fire
