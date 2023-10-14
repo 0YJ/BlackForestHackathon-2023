@@ -34,7 +34,12 @@ def main():
         id_sock = socket.recv()
         assert not socket.recv()    # empty data here
         assert socket.recv() == id_sock
+
         message = socket.recv()
         print('received:', message)
         set_fan_speed(message)
+        
     shutdown()
+
+if __name__ == '__main__':
+    main()
