@@ -4,7 +4,7 @@ Grand-Filter AI'm Smoke
 [![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/shoch/bfh-2023)
 
 <!-- PROJECT LOGO -->
-## Group 7
+## ⭐Group 7
 <br />
 
 
