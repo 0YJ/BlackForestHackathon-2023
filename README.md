@@ -2,7 +2,7 @@
 Grand-Filter AI'm Smoke
 
 <!-- PROJECT SHIELDS -->
-[![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/0YJ/MPTSTD)
+[![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/shoch/bfh-2023)
 
 <!-- PROJECT LOGO -->
 <br />
