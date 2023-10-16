@@ -22,8 +22,8 @@ parser.add_argument("--names", type=str, default="yolov8.names", help="path to t
 args = parser.parse_args()
 
 # load yolo model
-model = YOLO('yolov8n-cls.pt')
-model.train(data='xxxx', epoh=100)
+model = YOLO('best.pt')
+#model.train(data='xxxx', epoh=100)
 
 # validation 
 metrics = model.val()
@@ -35,65 +35,65 @@ probs = result.probs
 print(probs.data)
 
 tensor([xxx])
-# Control the fan based on smoke density
+# control the fan based on smoke density
 def control_fan(smoke_density):
     if smoke_density == 0:
-        # No smoke detected, stop the fan
+        # no smoke detected, stop the fan
         logging.info("No smoke detected, fan stopped.")
     elif smoke_density == 1:
-        # Light smoke detected, fan running at low speed
+        # middle smoke detected, fan running at low speed
         logging.info("Light smoke detected, fan running at low speed.")
     elif smoke_density == 2:
-        # Heavy smoke detected, fan running at full speed
+        # full smoke detected, fan running at full speed
         logging.info("Heavy smoke detected, fan running at full speed")
 
 try:
     while True:
-        # Receive the Base64 encoded frame from the Raspberry Pi
+        # receive the Base64 encoded frame from the Raspberry Pi
         frame_as_base64 = socket.recv()
         
-        # Decode the frame from Base64
+        # decode the frame from Base64
         buffer = base64.b64decode(frame_as_base64)
         frame = cv2.imdecode(np.frombuffer(buffer, np.uint8), -1)
 
-        # Continue with smoke density calculation as in your original code
+        # continue with smoke density calculation as in your original code
 
-        # Detect objects, specifically "smoke," in the frame using YOLOv8
+        # detect objects, specifically "smoke," in the frame using YOLOv8
         results = yolo.detect(frame)
 
-        # Extract the smoke region and calculate its density
+        # extract the smoke region and calculate its density
         smoke_region = np.zeros_like(frame, dtype=np.uint8)
         for detection in results:
             if detection["name"] == "smoke" and detection["confidence"] > 0.5:
                 x, y, w, h = detection["box"]
-                # Extract the smoke region
+                # extract the smoke region
                 smoke_region[y:y+h, x:x+w] = frame[y:y+h, x:x+w]
 
-        # Convert the image to grayscale
+        # convert the image to grayscale
         gray = cv2.cvtColor(smoke_region, cv2.COLOR_BGR2GRAY)
 
-        # Threshold the image to separate smoke from the background
+        # threshold the image to separate smoke from the background
         _, binary = cv2.threshold(gray, 200, 255, cv2.THRESH_BINARY)
 
-        # Calculate the number of white pixels (smoke pixels)
+        # calculate the number of white pixels (smoke pixels)
         white_pixels = cv2.countNonZero(binary)
 
-        # Calculate density
+        # calculate density
         density = white_pixels / (smoke_region.shape[0] * smoke_region.shape[1])
 
-        # Estimate the smoke density level
-        smoke_density = 0  # Default to no smoke
+        # define whatz are smoke density levels
+            smoke_density = 0  # default to no smoke
         if density < 0.1:
-            smoke_density = 0  # No smoke
+            smoke_density = 0  # no smoke
         elif density < 0.5:
-            smoke_density = 1  # Light smoke
+            smoke_density = 1  # middle smoke
         else:
-            smoke_density = 2  # Heavy smoke
+            smoke_density = 2  # full smoke
 
-        # Control the fan
+        # control the fan
         control_fan(smoke_density)
 
-        # Display the frame with smoke density and fan status information
+        # display the frame with smoke density and fan status information
         text_color = (0, 255, 0)  # Green
         if smoke_density == 1:
             text_color = (0, 255, 255)  # Yellow
@@ -102,13 +102,12 @@ try:
         cv2.putText(frame, f"Smoke density: {smoke_density}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, text_color, 2)
         cv2.imshow("Smoke Detection", frame)
 
-        # Exit if the 'q' key is pressed
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
 except KeyboardInterrupt:
     pass
 
-# Close the socket
+# close the socket
 socket.close()
 
