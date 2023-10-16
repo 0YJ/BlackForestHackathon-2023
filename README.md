@@ -7,7 +7,6 @@ Grand-Filter AI'm Smoke
 ## ⭐Group 7⭐
 <br />
 
-
 </p>
 
 ```sh
