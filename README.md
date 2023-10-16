@@ -3,12 +3,7 @@ Grand-Filter AI'm Smoke
 
 <!-- PROJECT SHIELDS -->
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+[![Github][git-shield]][https://github.com/shoch/bfh-2023/edit/main/README.md]
 
 <!-- PROJECT LOGO -->
 <br />
