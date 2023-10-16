@@ -39,7 +39,7 @@ while True:
     n += 1
     
     # load model
-    model = YOLO('yolov8n-cls.pt')
+    model = YOLO('best.pt')
     
     images = [cv2.imread(file) for file in glob.glob("./received_frames/*.jpg")]
 
@@ -50,7 +50,7 @@ while True:
         score = result['score']  
         cv2.putText(frame, f'{label}: {score}', ...)
 
-    cv2.imshow('Video', frame)
+    cv2.imshow('video', frame)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
