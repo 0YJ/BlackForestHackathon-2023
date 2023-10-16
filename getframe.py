@@ -38,7 +38,6 @@ while True:
 
     n += 1
     
-    # load model
     model = YOLO('best.pt')
     
     images = [cv2.imread(file) for file in glob.glob("./received_frames/*.jpg")]
