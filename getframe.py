@@ -33,7 +33,7 @@ while True:
 
     working = True
     subprocess.call(f'nc -lp 9999 > {fullname}.tmp', shell=True)
-    os.rename(f'{fullname}.tmp', fullname)
+    os.rename(f'{fullname}.jpg', fullname)
     working = False
 
     n += 1
