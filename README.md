@@ -1,13 +1,11 @@
 # bfh-2023 
 Grand-Filter AI'm Smoke
-## Group 7
-
 <!-- PROJECT SHIELDS -->
 [![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/shoch/bfh-2023)
 
 <!-- PROJECT LOGO -->
+## Group 7
 <br />
-
 
 
 </p>
