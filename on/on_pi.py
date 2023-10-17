@@ -71,28 +71,30 @@ try:
         # decode the frame from Base64
         #buffer = base64.b64decode(frame_as_base64)
         frame = cv2.imdecode(np.frombuffer(buffer, np.uint8), -1)
-
+        
         # classify smoke
         results = yolo.classify(frame)
 
         # extract the smoke region and calculate its density
-        smoke_region = np.zeros_like(frame, dtype=np.uint8)
-        for detection in results:
-            if detection["name"] == "smoke" and detection["confidence"] > 0.5:
-                x, y, w, h = detection["box"]
-                # extract the smoke region
-                smoke_region[y:y+h, x:x+w] = frame[y:y+h, x:x+w]
+        # we don't do semantic segmentation but classify now 
+        #smoke_region = np.zeros_like(frame, dtype=np.uint8)
+        #for detection in results:
+        #    if detection["name"] == "smoke" and detection["confidence"] > 0.5:
+        #        x, y, w, h = detection["box"]
+        #        # extract the smoke region
+        #        smoke_region[y:y+h, x:x+w] = frame[y:y+h, x:x+w]
 
         # convert the image to grayscale
-        gray = cv2.cvtColor(smoke_region, cv2.COLOR_BGR2GRAY)
-
+        #gray = cv2.cvtColor(smoke_region, cv2.COLOR_BGR2GRAY)
+        gray = cv2.cv2.Color(result[0], cv2.COLOR_BGR2GRAY)
+        
         # threshold the image to separate smoke from the background
         _, binary = cv2.threshold(gray, 200, 255, cv2.THRESH_BINARY)
 
         # calculate the number of white pixels (smoke pixels)
         white_pixels = cv2.countNonZero(binary)
 
-        # calculate density
+        # calculate density from frame
         density = white_pixels / (smoke_region.shape[0] * smoke_region.shape[1])
 
         # define whatz are smoke density levels
@@ -110,6 +112,7 @@ try:
         control_fan(smoke_density)
 
         # display the frame with smoke density and fan status information
+        
         text_color = (0, 255, 0)  # Green
         if smoke_density == 1:
             text_color = (0, 255, 255)  # Yellow
