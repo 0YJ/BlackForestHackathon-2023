@@ -5,11 +5,13 @@ import numpy as np
 import argparse
 import logging
 from ultralytics import YOLO
+import RPi.GPIO as GPIO
 
 # zmq socket set for communication with the pi
 context = zmq.Context()
 socket = context.socket(zmq.PAIR)
 socket.bind("tcp://192.168.175.0:6666")
+print('connection established')
 
 # set up logging
 logging.basicConfig(format="%(asctime)s %(levelname)s: %(message)s", level=logging.INFO)
@@ -21,6 +23,13 @@ parser.add_argument("--cfg", type=str, default="yolov8.yaml", help="path to the 
 parser.add_argument("--names", type=str, default="yolov8.names", help="path to the names file")
 args = parser.parse_args()
 
+FAN1 = 18
+FAN2 = 23
+def setup_gpio():
+    GPIO.setmode(GPIO.BCM)   
+    GPIO.setup(FAN1, GPIO.OUT)
+    GPIO.setup(FAN2, GPIO.OUT)
+
 # load yolo model
 model = YOLO('best.pt')
 #model.train(data='...', epoh=100)
@@ -30,7 +39,7 @@ metrics = model.val()
 metrics.top1
 metrics.top5
 
-results = model.predict("xx")
+results = model.predict("...")
 probs = result.probs
 print(probs.data)
 
@@ -79,16 +88,19 @@ try:
         density = white_pixels / (smoke_region.shape[0] * smoke_region.shape[1])
 
         # define whatz are smoke density levels
-            smoke_density = 0  # default to no smoke
+        smoke_density = 0  # default to no smoke
         if density < 0.1:
             smoke_density = 0  # no smoke
+            GPIO.output(FAN1,False)
+            GPIO.output(FAN2,False)
         elif density < 0.5:
             smoke_density = 1  # middle smoke
+            GPIO.output(FAN1,True)
+            GPIO.output(FAN2,False)
         else:
             smoke_density = 2  # full smoke
-
-        # control the fan
-        control_fan(smoke_density)
+            GPIO.output(FAN1,True)
+            GPIO.output(FAN2,True)
 
         # display the frame with smoke density and fan status information
         text_color = (0, 255, 0)  # Green
@@ -107,4 +119,3 @@ except KeyboardInterrupt:
 
 # close the socket
 socket.close()
-
