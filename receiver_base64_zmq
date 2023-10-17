@@ -117,5 +117,4 @@ try:
 except KeyboardInterrupt:
     pass
 
-# close the socket
 socket.close()
