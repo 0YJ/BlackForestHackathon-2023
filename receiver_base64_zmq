@@ -50,11 +50,13 @@ def control_fan(smoke_density):
         GPIO.output(FAN1,False)
         GPIO.output(FAN2,False)
         logging.info("No smoke detected, fan stopped.")
+
     elif smoke_density == 1:
         # middle smoke detected, fan running at low speed
         GPIO.output(FAN1,True)
         GPIO.output(FAN2,False)
         logging.info("Mid smoke detected, fan running at low speed.")
+
     elif smoke_density == 2:
         # full smoke detected, fan running at full speed
         GPIO.output(FAN1,True)
