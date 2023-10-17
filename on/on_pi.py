@@ -108,11 +108,9 @@ try:
         else:
             smoke_density = 2  # full smoke
 
-
         control_fan(smoke_density)
 
         # display the frame with smoke density and fan status information
-        
         text_color = (0, 255, 0)  # Green
         if smoke_density == 1:
             text_color = (0, 255, 255)  # Yellow
