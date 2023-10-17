@@ -47,12 +47,18 @@ print(probs.data)
 def control_fan(smoke_density):
     if smoke_density == 0:
         # no smoke detected, stop the fan
+        GPIO.output(FAN1,False)
+        GPIO.output(FAN2,False)
         logging.info("No smoke detected, fan stopped.")
     elif smoke_density == 1:
         # middle smoke detected, fan running at low speed
+        GPIO.output(FAN1,True)
+        GPIO.output(FAN2,False)
         logging.info("Mid smoke detected, fan running at low speed.")
     elif smoke_density == 2:
         # full smoke detected, fan running at full speed
+        GPIO.output(FAN1,True)
+        GPIO.output(FAN2,True)
         logging.info("Full smoke detected, fan running at full speed")
 
 try:
@@ -91,16 +97,15 @@ try:
         smoke_density = 0  # default to no smoke
         if density < 0.1:
             smoke_density = 0  # no smoke
-            GPIO.output(FAN1,False)
-            GPIO.output(FAN2,False)
+
         elif density < 0.5:
             smoke_density = 1  # middle smoke
-            GPIO.output(FAN1,True)
-            GPIO.output(FAN2,False)
+
         else:
             smoke_density = 2  # full smoke
-            GPIO.output(FAN1,True)
-            GPIO.output(FAN2,True)
+
+
+        control_fan(smoke_density)
 
         # display the frame with smoke density and fan status information
         text_color = (0, 255, 0)  # Green
