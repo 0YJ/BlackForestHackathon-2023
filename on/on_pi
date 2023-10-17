@@ -7,7 +7,7 @@ import logging
 from ultralytics import YOLO
 import RPi.GPIO as GPIO
 
-# zmq socket set for communication with the pi
+
 context = zmq.Context()
 socket = context.socket(zmq.PAIR)
 socket.bind("tcp://192.168.175.0:6666")
@@ -66,14 +66,14 @@ def control_fan(smoke_density):
 try:
     while True:
         # receive base64 encoded frame from the Raspberry Pi
-        frame_as_base64 = socket.recv()
+        #frame_as_base64 = socket.recv()
         
         # decode the frame from Base64
-        buffer = base64.b64decode(frame_as_base64)
+        #buffer = base64.b64decode(frame_as_base64)
         frame = cv2.imdecode(np.frombuffer(buffer, np.uint8), -1)
 
-        # detect objects, specifically "smoke," in the frame using YOLOv8
-        results = yolo.detect(frame)
+        # classify smoke
+        results = yolo.classify(frame)
 
         # extract the smoke region and calculate its density
         smoke_region = np.zeros_like(frame, dtype=np.uint8)
