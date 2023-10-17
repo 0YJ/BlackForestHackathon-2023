@@ -1,4 +1,4 @@
-![logo](https://github.com/shoch/bfh-2023/on/ba53a32cb9ec4267b779185fdeb9b05b.png)
+![logo](https://github.com/shoch/bfh-2023/logo.png)
 
 # Grand-Filter AI'm Smoke  
 ## 🔥bfh-2023🔥
