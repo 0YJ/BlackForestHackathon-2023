@@ -34,7 +34,6 @@ results = model.predict("xx")
 probs = result.probs
 print(probs.data)
 
-tensor([...])
 # control the fan based on smoke density
 def control_fan(smoke_density):
     if smoke_density == 0:
