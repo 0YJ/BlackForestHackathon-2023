@@ -1,3 +1,5 @@
+![logo](https://github.com/)
+
 # Grand-Filter AI'm Smoke  
 ## 🔥bfh-2023🔥
 This project belongs to the Black Forest Hackathon 2023 project, which aims to achieve the purpose of embedded machine learning model combined with OpenCV vision library to detect smoke concentration and automatically adjust indoor air output to improve combustion efficiency, save energy and protect the environment.
