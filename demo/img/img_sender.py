@@ -5,8 +5,7 @@ from imutils.video import VideoStream
 
 cap = VideoStream()
 
-# change this to your server address
-sender = imagezmq.ImageSender()#(connect_to='tcp://localhost:5555') 
+sender = imagezmq.ImageSender() 
 
 cam_id = socket.gethostname()
 stream = cap.start()

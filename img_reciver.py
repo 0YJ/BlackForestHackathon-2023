@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 import zmq
 import time
+
 # zmq socket set for communication with the pi
 context = zmq.Context()
 socket = context.socket(zmq.PAIR)

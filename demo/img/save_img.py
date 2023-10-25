@@ -3,7 +3,6 @@ from imutils.video import VideoStream
 import time
 import os
 
-
 cap = VideoStream()
 stream = cap.start()
 time.sleep(2)
