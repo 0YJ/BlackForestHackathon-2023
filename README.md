@@ -11,16 +11,10 @@ This project belongs to the Black Forest Hackathon 2023 project, which aims to a
 </p>
 
 ```sh
-
 python -m venv .env oder  py -m venv .env 
 .env\Scripts\activate
 pip install -r requirements.txt
 pip3 install ultralytics
 
 python demo\img\img_sender.py
-
 ```
-
-
-
-
